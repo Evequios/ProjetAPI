@@ -76,12 +76,16 @@ public class CreditDemandController {
 
     @PatchMapping("/{id}/cancel")
     public ResponseEntity<EntityModel<CreditDemand>> cancelCreditDemand(@PathVariable int id) {
-        CreditDemand creditDemand = creditDemandService.getCreditDemand(id);
-        creditDemand.setStatus(CreditDemandStatus.REFUSED);
-        creditDemand.setDecisionDate(LocalDate.now());
-        return ResponseEntity.ok(EntityModel.of(creditDemandService.updateCreditDemand(creditDemand),
+        return ResponseEntity.ok(EntityModel.of(creditDemandService.cancelCreditDemand(id),
                 linkTo(methodOn(CreditDemandController.class).getCreditDemand(id)).withSelfRel(),
                 linkTo(methodOn(CreditDemandController.class).getCreditDemands()).withRel("creditdemands")));
+        
+        // CreditDemand creditDemand = creditDemandService.getCreditDemand(id);
+        // creditDemand.setStatus(CreditDemandStatus.REFUSED);
+        // creditDemand.setDecisionDate(LocalDate.now());
+        // return ResponseEntity.ok(EntityModel.of(creditDemandService.updateCreditDemand(creditDemand),
+        //         linkTo(methodOn(CreditDemandController.class).getCreditDemand(id)).withSelfRel(),
+        //         linkTo(methodOn(CreditDemandController.class).getCreditDemands()).withRel("creditdemands")));
     }
 
 }

@@ -46,4 +46,52 @@ public class CreditDemandOperationsService {
         
         return creditDemandOperationsRepository.save(creditDemand);
     }
+
+    public CreditDemand validationCreditDemand(int creditDemandId) {
+        CreditDemand creditDemand = creditDemandOperationsRepository.findById(creditDemandId)
+                .orElseThrow(() -> new CreditDemandNotFoundException("Credit demand " + creditDemandId + " not found"));
+
+        if(creditDemand.getStatus() == CreditDemandStatus.REVIEWING) {
+            creditDemand.setStatus(CreditDemandStatus.VALIDATION);
+            
+        }else{
+            throw new IllegalStateException("Credit demand " + creditDemandId + " status cannot be set as VALIDATED");
+        }
+        
+        return creditDemandOperationsRepository.save(creditDemand);
+    }
+
+    public CreditDemand acceptCreditDemand(int creditDemandId) {
+        CreditDemand creditDemand = creditDemandOperationsRepository.findById(creditDemandId)
+                .orElseThrow(() -> new CreditDemandNotFoundException("Credit demand " + creditDemandId + " not found"));
+
+        if(creditDemand.getStatus() == CreditDemandStatus.VALIDATION) {
+            creditDemand.setStatus(CreditDemandStatus.ACCEPTED);
+            
+        }else{
+            throw new IllegalStateException("Credit demand " + creditDemandId + " status cannot be set as ACCEPTED");
+        }
+        
+        return creditDemandOperationsRepository.save(creditDemand);
+    }
+
+    public CreditDemand refuseCreditDemand(int creditDemandId) {
+        CreditDemand creditDemand = creditDemandOperationsRepository.findById(creditDemandId)
+                .orElseThrow(() -> new CreditDemandNotFoundException("Credit demand " + creditDemandId + " not found"));
+
+        switch(creditDemand.getStatus()) {
+            case PENDING:
+            case REVIEWING:
+            case VALIDATION:
+                creditDemand.setStatus(CreditDemandStatus.REFUSED);
+                break;
+            case ACCEPTED:
+            case REFUSED:
+                throw new IllegalStateException("You cannot refuse a credit demand with status " + creditDemand.getStatus().toString());
+            default:
+                break;
+        }
+        
+        return creditDemandOperationsRepository.save(creditDemand);
+    }
 }

@@ -49,4 +49,46 @@ public class CreditDemandOperationsController {
             throw new UnallowedStatusTransitionException("You can't review a credit demand that is not pending");
         }
     }
+
+    @PatchMapping("/{creditDemandId}/validation")
+    public ResponseEntity<EntityModel<CreditDemand>> validationCreditDemand(@PathVariable int creditDemandId) {
+        try {
+            CreditDemand creditDemand = creditDemandOperationsService.validationCreditDemand(creditDemandId);
+            return ResponseEntity.ok(EntityModel.of(creditDemand,
+                    linkTo(methodOn(CreditDemandOperationsController.class).validationCreditDemand(creditDemandId))
+                            .withSelfRel()));
+        } catch (CreditDemandNotFoundException e) {
+            throw new CreditDemandNotFoundException("Credit demand " + creditDemandId + " not found");
+        } catch (IllegalStateException e) {
+            throw new UnallowedStatusTransitionException("You can't validate a credit demand that is not reviewing");
+        }
+    }
+
+    @PatchMapping("/{creditDemandId}/accept")
+    public ResponseEntity<EntityModel<CreditDemand>> acceptCreditDemand(@PathVariable int creditDemandId) {
+        try {
+            CreditDemand creditDemand = creditDemandOperationsService.acceptCreditDemand(creditDemandId);
+            return ResponseEntity.ok(EntityModel.of(creditDemand,
+                    linkTo(methodOn(CreditDemandOperationsController.class).acceptCreditDemand(creditDemandId))
+                            .withSelfRel()));
+        } catch (CreditDemandNotFoundException e) {
+            throw new CreditDemandNotFoundException("Credit demand " + creditDemandId + " not found");
+        } catch (IllegalStateException e) {
+            throw new UnallowedStatusTransitionException("You can't accept a credit demand that is not validated");
+        }
+    }
+
+    @PatchMapping("/{creditDemandId}/refuse")
+    public ResponseEntity<EntityModel<CreditDemand>> refuseCreditDemand(@PathVariable int creditDemandId) {
+        try {
+            CreditDemand creditDemand = creditDemandOperationsService.refuseCreditDemand(creditDemandId);
+            return ResponseEntity.ok(EntityModel.of(creditDemand,
+                    linkTo(methodOn(CreditDemandOperationsController.class).refuseCreditDemand(creditDemandId))
+                            .withSelfRel()));
+        } catch (CreditDemandNotFoundException e) {
+            throw new CreditDemandNotFoundException("Credit demand " + creditDemandId + " not found");
+        } catch (IllegalStateException e) {
+            throw new UnallowedStatusTransitionException("You can't refuse a credit demand that is not pending, reviewing or validated");
+        }
+    }
 }
