@@ -1,5 +1,6 @@
 package com.kb.api.service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -47,6 +48,7 @@ public class CreditDemandOperationsService {
 
         if(creditDemand.getStatus() == CreditDemandStatus.PENDING) {
             creditDemand.setStatus(CreditDemandStatus.REVIEWING);
+            creditDemand.setDecisionDate(LocalDate.now());
             
         }else{
             throw new IllegalStateException("Credit demand " + creditDemandId + " status cannot be set as REVIEWING");
@@ -61,6 +63,7 @@ public class CreditDemandOperationsService {
 
         if(creditDemand.getStatus() == CreditDemandStatus.REVIEWING) {
             creditDemand.setStatus(CreditDemandStatus.VALIDATION);
+            creditDemand.setDecisionDate(LocalDate.now());
             
         }else{
             throw new IllegalStateException("Credit demand " + creditDemandId + " status cannot be set as VALIDATED");
@@ -75,6 +78,7 @@ public class CreditDemandOperationsService {
 
         if(creditDemand.getStatus() == CreditDemandStatus.VALIDATION) {
             creditDemand.setStatus(CreditDemandStatus.ACCEPTED);
+            creditDemand.setDecisionDate(LocalDate.now());
             
         }else{
             throw new IllegalStateException("Credit demand " + creditDemandId + " status cannot be set as ACCEPTED");
@@ -92,6 +96,7 @@ public class CreditDemandOperationsService {
             case REVIEWING:
             case VALIDATION:
                 creditDemand.setStatus(CreditDemandStatus.REFUSED);
+                creditDemand.setDecisionDate(LocalDate.now());
                 break;
             case ACCEPTED:
             case REFUSED:

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+import com.kb.api.exceptions.CreditDemandNotFoundException;
+import com.kb.api.exceptions.UnallowedStatusTransitionException;
 import com.kb.api.model.CreditDemand;
 import com.kb.api.service.CreditDemandService;
 import com.kb.api.utils.CreditDemandStatus;
@@ -76,16 +78,15 @@ public class CreditDemandController {
 
     @PatchMapping("/{id}/cancel")
     public ResponseEntity<EntityModel<CreditDemand>> cancelCreditDemand(@PathVariable int id) {
+        try {
         return ResponseEntity.ok(EntityModel.of(creditDemandService.cancelCreditDemand(id),
                 linkTo(methodOn(CreditDemandController.class).getCreditDemand(id)).withSelfRel(),
                 linkTo(methodOn(CreditDemandController.class).getCreditDemands()).withRel("creditdemands")));
-        
-        // CreditDemand creditDemand = creditDemandService.getCreditDemand(id);
-        // creditDemand.setStatus(CreditDemandStatus.REFUSED);
-        // creditDemand.setDecisionDate(LocalDate.now());
-        // return ResponseEntity.ok(EntityModel.of(creditDemandService.updateCreditDemand(creditDemand),
-        //         linkTo(methodOn(CreditDemandController.class).getCreditDemand(id)).withSelfRel(),
-        //         linkTo(methodOn(CreditDemandController.class).getCreditDemands()).withRel("creditdemands")));
+        } catch (CreditDemandNotFoundException e){
+            throw new CreditDemandNotFoundException("Credit demand " + id + " not found");
+        } catch (IllegalStateException e) {
+            throw new UnallowedStatusTransitionException("You can't cancel a credit demand that is already accepted or refused");
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package com.kb.api.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -65,19 +66,16 @@ public class CreditDemandService {
             case REVIEWING:
             case VALIDATION:
                 creditDemand.setStatus(CreditDemandStatus.REFUSED);
+                creditDemand.setDecisionDate(LocalDate.now());
                 break;
             case ACCEPTED:
             case REFUSED:
-                throw new UnallowedStatusTransitionException("You cannot cancel a credit demand with status "
+                throw new IllegalStateException("You cannot cancel a credit demand with status "
                         + creditDemand.getStatus().toString());
             default:
                 break;
         }
         
-
-        return creditDemandRepository.findById(id).map(c -> {
-            c.setStatus(CreditDemandStatus.REFUSED);
-            return creditDemandRepository.save(c);
-        }).orElse(null);
+        return creditDemandRepository.save(creditDemand);
     }
 }
