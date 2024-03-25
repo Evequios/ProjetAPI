@@ -25,7 +25,7 @@ public class CreditDemand {
     private String lastname;
     private String firstName;
     private Date birthDate;
-    private List<Integer> incomesOnDemand;
+    private int incomesOnDemand;
     private String employmentOnDemand;
     private CreditDemandStatus status;
     private String decision;
@@ -96,11 +96,11 @@ public class CreditDemand {
         this.birthDate = birthDate;
     }
 
-    public List<Integer> getIncomeOnDemand() {
+    public int getIncomesOnDemand() {
         return incomesOnDemand;
     }
 
-    public void setIncomeOnDemand(List<Integer> incomesOnDemand) {
+    public void setIncomesOnDemand(int incomesOnDemand) {
         this.incomesOnDemand = incomesOnDemand;
     }
 
