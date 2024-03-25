@@ -1,5 +1,6 @@
 package com.kb.api.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import com.kb.api.utils.CreditDemandStatus;
@@ -42,7 +43,7 @@ public class CreditDemand {
 
     @Column(name = "birthdate")
     @Temporal(TemporalType.DATE)
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "incomesondemand")
     private int incomesOnDemand;
@@ -56,11 +57,11 @@ public class CreditDemand {
 
     @Column(name = "creationdate")
     @Temporal(TemporalType.DATE)
-    private Date creationDate;
+    private LocalDate creationDate;
 
     @Column(name = "decisiondate")
     @Temporal(TemporalType.DATE)
-    private Date decisionDate;
+    private LocalDate decisionDate;
 
     public int getId() {
         return id;
@@ -118,11 +119,11 @@ public class CreditDemand {
         this.firstName = firstName;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -150,19 +151,19 @@ public class CreditDemand {
         this.currentStatus = currentStatus;
     }
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Date getDecisionDate() {
+    public LocalDate getDecisionDate() {
         return decisionDate;
     }
 
-    public void setDecisionDate(Date decisionDate) {
+    public void setDecisionDate(LocalDate decisionDate) {
         this.decisionDate = decisionDate;
     }
     

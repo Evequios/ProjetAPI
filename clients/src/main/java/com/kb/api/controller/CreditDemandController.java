@@ -1,5 +1,6 @@
 package com.kb.api.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,6 +9,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,6 +21,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import com.kb.api.model.CreditDemand;
 import com.kb.api.service.CreditDemandService;
+import com.kb.api.utils.CreditDemandStatus;
 
 @RestController
 @RequestMapping("/api/creditdemands")
@@ -70,5 +73,15 @@ public class CreditDemandController {
         return creditDemandService.deleteCreditDemand(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
+
+    @PatchMapping("/{id}/cancel")
+    public ResponseEntity<EntityModel<CreditDemand>> cancelCreditDemand(@PathVariable int id) {
+        CreditDemand creditDemand = creditDemandService.getCreditDemand(id);
+        creditDemand.setStatus(CreditDemandStatus.REFUSED);
+        creditDemand.setDecisionDate(LocalDate.now());
+        return ResponseEntity.ok(EntityModel.of(creditDemandService.updateCreditDemand(creditDemand),
+                linkTo(methodOn(CreditDemandController.class).getCreditDemand(id)).withSelfRel(),
+                linkTo(methodOn(CreditDemandController.class).getCreditDemands()).withRel("creditdemands")));
+    }
 
 }

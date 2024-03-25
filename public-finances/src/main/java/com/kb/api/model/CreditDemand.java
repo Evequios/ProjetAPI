@@ -2,10 +2,17 @@ package com.kb.api.model;
 
 import java.util.Date;
 
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.core.LinkBuilderSupport;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.ResponseEntity;
+
 import com.kb.api.utils.CreditDemandStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -49,6 +56,7 @@ public class CreditDemand {
     private String jobOnDemand;
 
     @Column(name = "currentstatus")
+    @Enumerated(EnumType.STRING)
     private CreditDemandStatus currentStatus;
 
     @Column(name = "creationdate")
@@ -161,6 +169,11 @@ public class CreditDemand {
 
     public void setDecisionDate(Date decisionDate) {
         this.decisionDate = decisionDate;
+    }
+
+    public LinkBuilderSupport<WebMvcLinkBuilder> linkTo(ResponseEntity<EntityModel<CreditDemand>> linkCreditDemand) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'linkTo'");
     }
     
 }
