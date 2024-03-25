@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,7 +57,15 @@ public class CreditDemandController {
                 linkTo(methodOn(CreditDemandController.class).getCreditDemands()).withRel("creditdemands")));
     }
 
-    @DeleteMapping
+    @PutMapping("/{id}")
+    public ResponseEntity<EntityModel<CreditDemand>> updateCreditDemand(@PathVariable int id, @RequestBody CreditDemand creditDemand) {
+        creditDemand.setId(id);
+        return ResponseEntity.ok(EntityModel.of(creditDemandService.updateCreditDemand(creditDemand),
+                linkTo(methodOn(CreditDemandController.class).getCreditDemand(id)).withSelfRel(),
+                linkTo(methodOn(CreditDemandController.class).getCreditDemands()).withRel("creditdemands")));
+    }
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCreditDemand(@PathVariable int id) {
         return creditDemandService.deleteCreditDemand(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }

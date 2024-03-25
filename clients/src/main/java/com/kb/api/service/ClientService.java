@@ -2,7 +2,6 @@ package com.kb.api.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.kb.api.model.Client;

@@ -30,7 +30,7 @@ public class CreditDemandService {
             c.setFirstName(creditDemand.getFirstName());
             c.setBirthDate(creditDemand.getBirthDate());
             c.setIncomesOnDemand(creditDemand.getIncomesOnDemand());
-            c.setEmploymentOnDemand(creditDemand.getEmploymentOnDemand());
+            c.setJobOnDemand(creditDemand.getJobOnDemand());
             c.setStatus(creditDemand.getStatus());
             c.setCreationDate(creditDemand.getCreationDate());
             c.setDecisionDate(creditDemand.getDecisionDate());

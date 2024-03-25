@@ -1,34 +1,60 @@
 package com.kb.api.model;
 
 import java.util.Date;
-import java.util.List;
 
 import com.kb.api.utils.CreditDemandStatus;
 
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "CreditDemand")
+@Table(name = "Creditdemand")
 public class CreditDemand {
 
     @Id
     @GeneratedValue
     private int id;
+
+    @Column(name = "clientid")
     private int clientId;
+
+    @Column(name = "advisorid")
     private int advisorId;
+
+    @Column(name = "amount")
     private int amount;
+
+    @Column(name = "duration")
     private int duration;
-    private String lastname;
+
+    @Column(name = "lastname")
+    private String lastName;
+
+    @Column(name = "firstname")
     private String firstName;
+
+    @Column(name = "birthdate")
     private Date birthDate;
+
+    @Column(name = "incomesondemand")
     private int incomesOnDemand;
-    private String employmentOnDemand;
-    private CreditDemandStatus status;
+
+    @Column(name = "jobondemand")
+    private String jobOnDemand;
+
+    @Column(name = "currentstatus")
+    @Enumerated(EnumType.STRING)
+    private CreditDemandStatus currentStatus;
+
+    @Column(name = "creationdate")
     private Date creationDate;
+
+    @Column(name = "decisiondate")
     private Date decisionDate;
 
     public int getId() {
@@ -72,11 +98,11 @@ public class CreditDemand {
     }
 
     public String getLastname() {
-        return lastname;
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastname(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getFirstName() {
@@ -103,20 +129,20 @@ public class CreditDemand {
         this.incomesOnDemand = incomesOnDemand;
     }
 
-    public String getEmploymentOnDemand() {
-        return employmentOnDemand;
+    public String getJobOnDemand() {
+        return jobOnDemand;
     }
 
-    public void setEmploymentOnDemand(String employmentOnDemand) {
-        this.employmentOnDemand = employmentOnDemand;
+    public void setJobOnDemand(String jobOnDemand) {
+        this.jobOnDemand = jobOnDemand;
     }
 
     public CreditDemandStatus getStatus() {
-        return status;
+        return currentStatus;
     }
 
-    public void setStatus(CreditDemandStatus status) {
-        this.status = status;
+    public void setStatus(CreditDemandStatus currentStatus) {
+        this.currentStatus = currentStatus;
     }
 
     public Date getCreationDate() {
