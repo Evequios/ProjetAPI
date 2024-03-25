@@ -33,7 +33,8 @@ public class CreditDemandOperationsController {
         return ResponseEntity.ok(EntityModel.of(
                 creditDemandOperationsService.linkBankAdvisorToCreditDemand(creditDemandId, bankAdvisorId),
                 linkTo(methodOn(CreditDemandOperationsController.class).linkCreditDemand(creditDemandId, bankAdvisorId))
-                        .withSelfRel()));
+                        .withSelfRel(),
+                linkTo(methodOn(CreditDemandOperationsController.class).reviewCreditDemand(creditDemandId)).withRel("review")));
     }
 
     @PatchMapping("/{creditDemandId}/review")
@@ -42,7 +43,8 @@ public class CreditDemandOperationsController {
             CreditDemand creditDemand = creditDemandOperationsService.reviewCreditDemand(creditDemandId);
             return ResponseEntity.ok(EntityModel.of(creditDemand,
                     linkTo(methodOn(CreditDemandOperationsController.class).reviewCreditDemand(creditDemandId))
-                            .withSelfRel()));
+                            .withSelfRel(),
+                    linkTo(methodOn(CreditDemandOperationsController.class).validationCreditDemand(creditDemandId)).withRel("validation")));
         } catch (CreditDemandNotFoundException e) {
             throw new CreditDemandNotFoundException("Credit demand " + creditDemandId + " not found");
         } catch (IllegalStateException e) {
@@ -56,7 +58,8 @@ public class CreditDemandOperationsController {
             CreditDemand creditDemand = creditDemandOperationsService.validationCreditDemand(creditDemandId);
             return ResponseEntity.ok(EntityModel.of(creditDemand,
                     linkTo(methodOn(CreditDemandOperationsController.class).validationCreditDemand(creditDemandId))
-                            .withSelfRel()));
+                            .withSelfRel(),
+                    linkTo(methodOn(CreditDemandOperationsController.class).acceptCreditDemand(creditDemandId)).withRel("accept")));
         } catch (CreditDemandNotFoundException e) {
             throw new CreditDemandNotFoundException("Credit demand " + creditDemandId + " not found");
         } catch (IllegalStateException e) {
