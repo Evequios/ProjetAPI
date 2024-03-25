@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS CreditDemand (
     birthDate DATE NOT NULL,
     incomesOnDemand DECIMAL(10, 2) NOT NULL,
     jobOnDemand VARCHAR(255) NOT NULL,
-    currentStatus VARCHAR(255)NOT NULL DEFAULT 'Pending',
+    currentStatus VARCHAR(255)NOT NULL DEFAULT 'PENDING',
     creationDate DATE DEFAULT CURRENT_DATE, 
     decisionDate DATE,
     FOREIGN KEY (clientId) REFERENCES Client(id),

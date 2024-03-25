@@ -3,7 +3,7 @@ package com.kb.api.utils;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum CreditDemandStatus {
-    PENDING("Pending"), REVIEWING("Reviewing"), VALIDATION("Validation"), ACCEPTED("Accepted"), REFUSED("Refused");
+    PENDING("PENDING"), REVIEWING("REVIEWING"), VALIDATION("VALIDATION"), ACCEPTED("ACCEPTED"), REFUSED("REFUSED");
 
     private final String currentstatus;
 

@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "Creditdemand")
@@ -37,6 +39,7 @@ public class CreditDemand {
     private String firstName;
 
     @Column(name = "birthdate")
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
 
     @Column(name = "incomesondemand")
@@ -49,9 +52,11 @@ public class CreditDemand {
     private CreditDemandStatus currentStatus;
 
     @Column(name = "creationdate")
+    @Temporal(TemporalType.DATE)
     private Date creationDate;
 
     @Column(name = "decisiondate")
+    @Temporal(TemporalType.DATE)
     private Date decisionDate;
 
     public int getId() {
