@@ -32,7 +32,6 @@ public class CreditDemandService {
             c.setIncomesOnDemand(creditDemand.getIncomesOnDemand());
             c.setEmploymentOnDemand(creditDemand.getEmploymentOnDemand());
             c.setStatus(creditDemand.getStatus());
-            c.setDecision(creditDemand.getDecision());
             c.setCreationDate(creditDemand.getCreationDate());
             c.setDecisionDate(creditDemand.getDecisionDate());
             return creditDemandRepository.save(c);
