@@ -9,6 +9,8 @@ import com.kb.api.repository.ClientRepository;
 
 @Service
 public class ClientService {
+
+    
     
     private ClientRepository clientRepository;
     
@@ -20,6 +22,7 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
+    
     public Client updateClient(Client client) {
         return clientRepository.findById(client.getId()).map(c -> {
             c.setLastName(client.getLastName());

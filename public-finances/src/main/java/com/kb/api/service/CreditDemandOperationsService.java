@@ -5,11 +5,14 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.kb.api.exceptions.BankAdvisorNotFoundException;
+import com.kb.api.exceptions.CreditDemandLinkingImpossibleException;
 import com.kb.api.exceptions.CreditDemandNotFoundException;
 import com.kb.api.model.BankAdvisor;
 import com.kb.api.model.CreditDemand;
 import com.kb.api.repository.CreditDemandOperationsRepository;
 import com.kb.api.utils.CreditDemandStatus;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @Service
 public class CreditDemandOperationsService {
@@ -22,6 +25,7 @@ public class CreditDemandOperationsService {
         this.bankAdvisorService = bankAdvisorService;
     }
 
+    @CircuitBreaker(name = "creditDemandService", fallbackMethod = "linkBankAdvisorToCreditDemandFallback")
     public CreditDemand linkBankAdvisorToCreditDemand(int creditDemandId, int bankAdvisorId) {
         BankAdvisor bankAdvisor = bankAdvisorService.getBankAdvisor(bankAdvisorId);
         Optional.ofNullable(bankAdvisor)
@@ -31,6 +35,10 @@ public class CreditDemandOperationsService {
             c.setAdvisorId(bankAdvisorId);
             return creditDemandOperationsRepository.save(c);
         }).orElseThrow(() -> new CreditDemandNotFoundException("Credit demand " + creditDemandId + " not found"));
+    }
+
+    public CreditDemand linkBankAdvisorToCreditDemandFallback(int creditDemandId, int bankAdvisorId, Throwable t) {
+        throw new CreditDemandLinkingImpossibleException("Linking credit demand " + creditDemandId + " to bank advisor " + bankAdvisorId + " impossible. Please retry later."); 
     }
 
     public CreditDemand reviewCreditDemand(int creditDemandId) {

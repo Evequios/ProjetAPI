@@ -1,0 +1,13 @@
+C:\Users\kilia\OneDrive\M2\Déploiement, passage à l'échelle et disponibilité\ProjetAPI\public-finances\src\main\java\com\kb\api\model\BankAdvisor.java
+C:\Users\kilia\OneDrive\M2\Déploiement, passage à l'échelle et disponibilité\ProjetAPI\public-finances\src\main\java\com\kb\api\exceptions\BankAdvisorNotFoundException.java
+C:\Users\kilia\OneDrive\M2\Déploiement, passage à l'échelle et disponibilité\ProjetAPI\public-finances\src\main\java\com\kb\api\utils\CreditDemandStatus.java
+C:\Users\kilia\OneDrive\M2\Déploiement, passage à l'échelle et disponibilité\ProjetAPI\public-finances\src\main\java\com\kb\api\exceptions\CreditDemandNotFoundException.java
+C:\Users\kilia\OneDrive\M2\Déploiement, passage à l'échelle et disponibilité\ProjetAPI\public-finances\src\main\java\com\kb\api\controller\BankAdvisorController.java
+C:\Users\kilia\OneDrive\M2\Déploiement, passage à l'échelle et disponibilité\ProjetAPI\public-finances\src\main\java\com\kb\api\repository\CreditDemandOperationsRepository.java
+C:\Users\kilia\OneDrive\M2\Déploiement, passage à l'échelle et disponibilité\ProjetAPI\public-finances\src\main\java\com\kb\api\service\BankAdvisorService.java
+C:\Users\kilia\OneDrive\M2\Déploiement, passage à l'échelle et disponibilité\ProjetAPI\public-finances\src\main\java\com\kb\api\AppPublicFinances.java
+C:\Users\kilia\OneDrive\M2\Déploiement, passage à l'échelle et disponibilité\ProjetAPI\public-finances\src\main\java\com\kb\api\controller\CreditDemandOperationsController.java
+C:\Users\kilia\OneDrive\M2\Déploiement, passage à l'échelle et disponibilité\ProjetAPI\public-finances\src\main\java\com\kb\api\exceptions\UnallowedStatusTransitionException.java
+C:\Users\kilia\OneDrive\M2\Déploiement, passage à l'échelle et disponibilité\ProjetAPI\public-finances\src\main\java\com\kb\api\service\CreditDemandOperationsService.java
+C:\Users\kilia\OneDrive\M2\Déploiement, passage à l'échelle et disponibilité\ProjetAPI\public-finances\src\main\java\com\kb\api\model\CreditDemand.java
+C:\Users\kilia\OneDrive\M2\Déploiement, passage à l'échelle et disponibilité\ProjetAPI\public-finances\src\main\java\com\kb\api\repository\BankAdvisorRepository.java
