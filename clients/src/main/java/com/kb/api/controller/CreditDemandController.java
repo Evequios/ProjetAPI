@@ -1,6 +1,5 @@
 package com.kb.api.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +22,6 @@ import com.kb.api.exceptions.CreditDemandNotFoundException;
 import com.kb.api.exceptions.UnallowedStatusTransitionException;
 import com.kb.api.model.CreditDemand;
 import com.kb.api.service.CreditDemandService;
-import com.kb.api.utils.CreditDemandStatus;
 
 @RestController
 @RequestMapping("/api/creditdemands")

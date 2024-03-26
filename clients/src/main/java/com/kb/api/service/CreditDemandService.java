@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.kb.api.exceptions.CreditDemandNotFoundException;
-import com.kb.api.exceptions.UnallowedStatusTransitionException;
 import com.kb.api.model.CreditDemand;
 import com.kb.api.repository.CreditDemandRepository;
 import com.kb.api.utils.CreditDemandStatus;

@@ -1,7 +1,6 @@
 package com.kb.api.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import com.kb.api.utils.CreditDemandStatus;
 
